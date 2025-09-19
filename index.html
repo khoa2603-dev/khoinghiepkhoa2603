@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Đặt Đồ Ăn</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+    header { background: tomato; padding: 15px; color: white; text-align: center; }
+    nav { background: #333; padding: 10px; text-align: center; }
+    nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
+    section { padding: 20px; }
+    .menu { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+    .item { border: 1px solid #ccc; border-radius: 10px; width: 200px; padding: 10px; text-align: center; }
+    .item img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    .cart { margin-top: 20px; padding: 10px; border: 1px solid #333; border-radius: 5px; }
+    button { background: tomato; color: white; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer; margin: 5px 2px; }
+    button:hover { background: darkred; }
+    .form-container { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                      background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px #333; }
+    .form-container input, .form-container textarea { width: 100%; margin-bottom: 10px; padding: 8px; }
+    .form-container button { width: 100%; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🍔 Website Đặt Đồ Ăn Online</h1>
+  </header>
+
+  <nav>
+    <a href="#home">Trang chủ</a>
+    <a href="#menu">Thực đơn</a>
+    <a href="#combo">Combo</a>
+  </nav>
+
+  <!-- Trang Chủ -->
+  <section id="home">
+    <h2>Chào mừng bạn đến với cửa hàng của chúng tôi!</h2>
+    <p>Đồ ăn ngon, nóng hổi và giao tận nơi 🛵</p>
+  </section>
+
+  <!-- Thực Đơn -->
+  <section id="menu">
+    <h2>Thực đơn</h2>
+    <div class="menu">
+      <div class="item">
+        <img src="image/hinhbanhmi.jpg" alt="Bánh Ngọt">
+        <h3>Bánh Ngọt</h3>
+        <p>10.000đ</p>
+        <button onclick="addToCart('Bánh Ngọt', 10000)">+</button>
+        <button onclick="removeFromCart('Bánh Ngọt', 10000)">-</button>
+      </div>
+      <div class="item">
+        <img src="image/hinhsua.png" alt="Sữa Hộp">
+        <h3>Sữa Hộp</h3>
+        <p>5.000đ</p>
+        <button onclick="addToCart('Sữa Hộp', 5000)">+</button>
+        <button onclick="removeFromCart('Sữa Hộp', 5000)">-</button>
+      </div>
+      <div class="item">
+        <img src="image/hinhburger.png" alt="Burger">
+        <h3>Burger</h3>
+        <p>25.000đ</p>
+        <button onclick="addToCart('Burger', 25000)">+</button>
+        <button onclick="removeFromCart('Burger', 25000)">-</button>
+      </div>
+      <div class="item">
+        <img src="image/banhman.png" alt="Bánh Mặn">
+        <h3>Bánh Mặn</h3>
+        <p>12.000đ</p>
+        <button onclick="addToCart('Bánh Mặn', 12000)">+</button>
+        <button onclick="removeFromCart('Bánh Mặn', 12000)">-</button>
+      </div>
+      <div class="item">
+        <img src="image/banhcroissant.jpeg" alt="Bánh Croissant">
+        <h3>Bánh Croissant</h3>
+        <p>22.000đ</p>
+        <button onclick="addToCart('Bánh Croissant', 22000)">+</button>
+        <button onclick="removeFromCart('Bánh Croissant', 22000)">-</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Combo -->
+  <section id="combo">
+    <h2>Combo</h2>
+    <div class="menu">
+      <div class="item">
+        <img src="image/hinhcombo1.png" alt="Combo 1">
+        <h3>Thèm Ngọt: 2 Bánh Ngọt + 1 Sữa</h3>
+        <p>23.000đ</p>
+        <button onclick="addToCart('Combo 1: 2 Bánh Ngọt + 1 Sữa', 23000)">+</button>
+        <button onclick="removeFromCart('Combo 1: 2 Bánh Ngọt + 1 Sữa', 23000)">-</button>
+      </div>
+      <div class="item">
+        <img src="image/hinhcombo2.png" alt="Combo 2">
+        <h3>Thèm Mặn: 2 Bánh Mặn + 1 Sữa</h3>
+        <p>27.000đ</p>
+        <button onclick="addToCart('Combo 2: 2 Bánh Mặn + 1 Sữa', 27000)">+</button>
+        <button onclick="removeFromCart('Combo 2: 2 Bánh Mặn + 1 Sữa', 27000)">-</button>
+      </div>
+      <div class="item">
+        <img src="image/hinhcombo3.png" alt="Combo 3">
+        <h3>Đại Đại đi: 1 Mặn + 1 Ngọt + 1 Sữa</h3>
+        <p>25.000đ</p>
+        <button onclick="addToCart('Combo 3: 1 Mặn + 1 Ngọt + 1 Sữa', 25000)">+</button>
+        <button onclick="removeFromCart('Combo 3: 1 Bánh Mặn + 1 Bánh Ngọt + 1 Sữa', 25000)">-</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Giỏ hàng -->
+  <div class="cart">
+    <h3>🛒 Giỏ hàng</h3>
+    <ul id="cart"></ul>
+    <p><strong>Tổng tiền: <span id="total">0</span> đ</strong></p>
+    <button onclick="openForm()">Đặt hàng</button>
+  </div>
+
+  <!-- Form đặt hàng -->
+  <div class="form-container" id="orderForm">
+    <h3>Thông tin đặt hàng</h3>
+    <input type="text" id="name" placeholder="Họ và tên">
+    <input type="text" id="phone" placeholder="Số điện thoại">
+    <textarea id="address" placeholder="Địa chỉ giao hàng"></textarea>
+    <button onclick="confirmOrder()">Xác nhận đặt hàng</button>
+    <button onclick="closeForm()" style="background: gray; margin-top:5px;">Hủy</button>
+  </div>
+
+  <script>
+    let cart = {};
+    let total = 0;
+    const scriptURL = "https://script.google.com/macros/s/AKfycbz1kKCGdLebfxSmzHpb9gfiWlUfi6Qcx0Yvd4O3e61BuGk2kjvY2Ut7ydSYYuO0V9Xh/exec";
+
+    function addToCart(name, price) {
+      if (!cart[name]) cart[name] = { quantity: 0, price: price };
+      cart[name].quantity++;
+      total += price;
+      renderCart();
+    }
+
+    function removeFromCart(name, price) {
+      if (!cart[name]) return;
+      if (cart[name].quantity > 0) {
+        cart[name].quantity--;
+        total -= price;
+        if (cart[name].quantity === 0) {
+          delete cart[name];
+        }
+        renderCart();
+      }
+    }
+
+    function renderCart() {
+      const cartList = document.getElementById("cart");
+      cartList.innerHTML = "";
+      for (let item in cart) {
+        const li = document.createElement("li");
+        li.textContent = `${item} × ${cart[item].quantity} - ${(cart[item].price * cart[item].quantity).toLocaleString()} đ`;
+        cartList.appendChild(li);
+      }
+      document.getElementById("total").textContent = total.toLocaleString();
+    }
+
+    function openForm() {
+      if (Object.keys(cart).length === 0) {
+        alert("Giỏ hàng đang trống!");
+        return;
+      }
+      document.getElementById("orderForm").style.display = "block";
+    }
+
+    function closeForm() {
+      document.getElementById("orderForm").style.display = "none";
+    }
+
+    function confirmOrder() {
+      const name = document.getElementById("name").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const address = document.getElementById("address").value.trim();
+      if (!name || !phone || !address) {
+        alert("Vui lòng điền đầy đủ thông tin!");
+        return;
+      }
+
+      const itemsSummary = Object.entries(cart)
+        .map(([item, data]) => `${item} × ${data.quantity}`)
+        .join(", ");
+
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("phone", phone);
+      formData.append("address", address);
+      formData.append("items", itemsSummary);
+      formData.append("total", total);
+
+      fetch(scriptURL, { method: "POST", body: formData })
+        .then(res => res.text())
+        .then(() => {
+          alert(`🎉 Cảm ơn ${name}! Đơn hàng của bạn đã được ghi lại.`);
+          cart = {};
+          total = 0;
+          renderCart();
+          closeForm();
+          document.getElementById("name").value = "";
+          document.getElementById("phone").value = "";
+          document.getElementById("address").value = "";
+        })
+        .catch(err => {
+          alert("❌ Lỗi khi gửi đơn hàng: " + err);
+        });
+    }
+  </script>
+</body>
+</html>
