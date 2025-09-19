@@ -5,26 +5,229 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Website Đặt Đồ Ăn</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-    header { background: tomato; padding: 15px; color: white; text-align: center; }
-    nav { background: #333; padding: 10px; text-align: center; }
-    nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
-    section { padding: 20px; }
-    .menu { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
-    .item { border: 1px solid #ccc; border-radius: 10px; width: 200px; padding: 10px; text-align: center; }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('image/bg7.jpg'); 
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    header {
+      background: rgba(255, 99, 71, 0.8);
+      padding: 15px;
+      color: white;
+      text-align: center;
+    }
+
+    nav {
+      background: rgba(51, 51, 51, 0.8);
+      padding: 10px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    section {
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      margin: 10px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
+    }
+
+    section:hover {
+      background: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+      transform: translateY(-3px);
+    }
+
+    .menu {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .item {
+      border-radius: 12px;
+      width: 200px;
+      padding: 10px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.2);
+      border: 3px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+      transition: all 0.3s ease;
+    }
+
+    .item:hover {
+      background: rgba(255, 255, 255, 0.35);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.7);
+      transform: translateY(-5px);
+    }
+
     .item img {
       width: 100%;
       height: 150px;
       object-fit: cover;
       border-radius: 10px;
     }
-    .cart { margin-top: 20px; padding: 10px; border: 1px solid #333; border-radius: 5px; }
-    button { background: tomato; color: white; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer; margin: 5px 2px; }
-    button:hover { background: darkred; }
-    .form-container { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-                      background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px #333; }
-    .form-container input, .form-container textarea { width: 100%; margin-bottom: 10px; padding: 8px; }
-    .form-container button { width: 100%; }
+
+    .item p {
+      color: red;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .item button {
+      background: tomato;
+      color: white;
+      border: none;
+      padding: 12px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 5px 2px;
+      font-size: 18px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .item button:hover {
+      background: darkred;
+      transform: scale(1.15);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.5);
+    }
+
+    .cart {
+      margin-top: 20px;
+      padding: 10px;
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.2);
+      border: 3px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+      transition: all 0.3s ease;
+    }
+
+    .cart:hover {
+      background: rgba(255, 255, 255, 0.35);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.7);
+      transform: translateY(-3px);
+    }
+
+    #total {
+      color: red;
+      font-weight: bold;
+    }
+
+    .cart > button {
+      background: #ff6347;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .cart > button:hover {
+      background: darkred;
+    }
+
+    .loading {
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    .form-container {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255,255,255,0.95);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #333;
+      font-family: Aharoni, sans-serif;
+    }
+
+    .form-container input,
+    .form-container textarea,
+    .form-container button {
+      font-family: Aharoni, sans-serif;
+    }
+
+    .form-container input,
+    .form-container textarea {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .form-container button {
+      width: 100%;
+      padding: 10px;
+      background: tomato;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .form-container button:hover {
+      background: darkred;
+      transform: scale(1.05);
+    }
+
+    /* Popup QR */
+    #qrPopup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255,255,255,0.95);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #333;
+      text-align: center;
+    }
+
+    #qrPopup img {
+      width: 200px;
+      height: 200px;
+    }
+
+    #qrPopup button {
+      margin-top: 10px;
+      background: tomato;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    #qrPopup button:hover {
+      background: darkred;
+    }
   </style>
 </head>
 <body>
@@ -38,13 +241,13 @@
     <a href="#combo">Combo</a>
   </nav>
 
-  <!-- Trang Chủ -->
+  <!-- Trang chủ -->
   <section id="home">
     <h2>Chào mừng bạn đến với cửa hàng của chúng tôi!</h2>
     <p>Đồ ăn ngon, nóng hổi và giao tận nơi 🛵</p>
   </section>
 
-  <!-- Thực Đơn -->
+  <!-- Thực đơn -->
   <section id="menu">
     <h2>Thực đơn</h2>
     <div class="menu">
@@ -109,7 +312,7 @@
         <h3>Đại Đại đi: 1 Mặn + 1 Ngọt + 1 Sữa</h3>
         <p>25.000đ</p>
         <button onclick="addToCart('Combo 3: 1 Mặn + 1 Ngọt + 1 Sữa', 25000)">+</button>
-        <button onclick="removeFromCart('Combo 3: 1 Bánh Mặn + 1 Bánh Ngọt + 1 Sữa', 25000)">-</button>
+        <button onclick="removeFromCart('Combo 3: 1 Mặn + 1 Ngọt + 1 Sữa', 25000)">-</button>
       </div>
     </div>
   </section>
@@ -119,7 +322,7 @@
     <h3>🛒 Giỏ hàng</h3>
     <ul id="cart"></ul>
     <p><strong>Tổng tiền: <span id="total">0</span> đ</strong></p>
-    <button onclick="openForm()">Đặt hàng</button>
+    <button id="orderButton" onclick="openForm()">Đặt hàng</button>
   </div>
 
   <!-- Form đặt hàng -->
@@ -128,8 +331,21 @@
     <input type="text" id="name" placeholder="Họ và tên">
     <input type="text" id="phone" placeholder="Số điện thoại">
     <textarea id="address" placeholder="Địa chỉ giao hàng"></textarea>
-    <button onclick="confirmOrder()">Xác nhận đặt hàng</button>
+
+    <p>Hình thức thanh toán:</p>
+    <label><input type="radio" name="payment" value="cash" checked> Tiền mặt</label>
+    <label><input type="radio" name="payment" value="bank"> Chuyển khoản</label>
+
+    <button id="confirmButton" onclick="confirmOrder()">Xác nhận đặt hàng</button>
     <button onclick="closeForm()" style="background: gray; margin-top:5px;">Hủy</button>
+  </div>
+
+  <!-- QR Popup -->
+  <div id="qrPopup">
+    <h3>Chuyển khoản</h3>
+    <p>Quét mã QR để thanh toán</p>
+    <img src="image/qr.png" alt="QR code">
+    <button onclick="closeQR()">Đóng</button>
   </div>
 
   <script>
@@ -179,14 +395,24 @@
       document.getElementById("orderForm").style.display = "none";
     }
 
+    function closeQR() {
+      document.getElementById("qrPopup").style.display = "none";
+    }
+
     function confirmOrder() {
       const name = document.getElementById("name").value.trim();
       const phone = document.getElementById("phone").value.trim();
       const address = document.getElementById("address").value.trim();
+      const confirmButton = document.getElementById("confirmButton");
+      const payment = document.querySelector('input[name="payment"]:checked').value;
+
       if (!name || !phone || !address) {
         alert("Vui lòng điền đầy đủ thông tin!");
         return;
       }
+
+      confirmButton.classList.add("loading");
+      confirmButton.textContent = "Đang gửi...";
 
       const itemsSummary = Object.entries(cart)
         .map(([item, data]) => `${item} × ${data.quantity}`)
@@ -198,6 +424,7 @@
       formData.append("address", address);
       formData.append("items", itemsSummary);
       formData.append("total", total);
+      formData.append("payment", payment);
 
       fetch(scriptURL, { method: "POST", body: formData })
         .then(res => res.text())
@@ -206,17 +433,24 @@
           cart = {};
           total = 0;
           renderCart();
-          closeForm();
           document.getElementById("name").value = "";
           document.getElementById("phone").value = "";
           document.getElementById("address").value = "";
+
+          if (payment === "bank") {
+            document.getElementById("qrPopup").style.display = "block";
+          } else {
+            closeForm();
+          }
         })
         .catch(err => {
           alert("❌ Lỗi khi gửi đơn hàng: " + err);
+        })
+        .finally(() => {
+          confirmButton.classList.remove("loading");
+          confirmButton.textContent = "Xác nhận đặt hàng";
         });
     }
   </script>
 </body>
 </html>
-
-
