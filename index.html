@@ -333,8 +333,14 @@
     <textarea id="address" placeholder="Địa chỉ giao hàng"></textarea>
 
     <p>Hình thức thanh toán:</p>
-    <label><input type="radio" name="payment" value="cash" checked> Tiền mặt</label>
-    <label><input type="radio" name="payment" value="bank"> Chuyển khoản</label>
+    <div style="display: flex; gap: 30px; align-items: center; margin-bottom: 10px;">
+      <label style="display: flex; align-items: center; cursor: pointer;">
+        <input type="radio" name="payment" value="cash" checked style="margin-right: 5px;"> Tiền mặt
+      </label>
+      <label style="display: flex; align-items: center; cursor: pointer;">
+        <input type="radio" name="payment" value="bank" style="margin-right: 5px;"> Chuyển khoản
+      </label>
+    </div>
 
     <button id="confirmButton" onclick="confirmOrder()">Xác nhận đặt hàng</button>
     <button onclick="closeForm()" style="background: gray; margin-top:5px;">Hủy</button>
