@@ -51,16 +51,18 @@
       transform: translateY(-3px);
     }
 
+    /* --- Dùng Grid thay vì Flex --- */
     .menu {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); /* 4 cột */
       gap: 20px;
-      flex-wrap: wrap;
-      justify-content: center;
+      justify-items: center;
     }
 
     .item {
       border-radius: 12px;
-      width: 200px;
+      width: 100%;
+      max-width: 200px;
       padding: 10px;
       text-align: center;
       background: rgba(255, 255, 255, 0.2);
@@ -259,6 +261,13 @@
         <button onclick="removeFromCart('Bánh Ngọt', 10000)">-</button>
       </div>
       <div class="item">
+        <img src="image/hinhnuocep.jpg" alt="Nước Ép">
+        <h3>Nước Ép</h3>
+        <p>10.000đ</p>
+        <button onclick="addToCart('Nước Ép', 10000)">+</button>
+        <button onclick="removeFromCart('Nước Ép', 10000)">-</button>
+      </div>
+      <div class="item">
         <img src="image/hinhsandwich.webp" alt="Bánh Sandwich">
         <h3>Bánh Sandwich</h3>
         <p>15.000đ</p>
@@ -452,12 +461,13 @@
 
           if (payment === "bank") {
             document.getElementById("qrPopup").style.display = "block";
-          } else {
-            closeForm();
           }
+
+          closeForm();
         })
         .catch(err => {
-          alert("❌ Lỗi khi gửi đơn hàng: " + err);
+          console.error("Error:", err);
+          alert("Có lỗi xảy ra khi gửi đơn hàng.");
         })
         .finally(() => {
           confirmButton.classList.remove("loading");
